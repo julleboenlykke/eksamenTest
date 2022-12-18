@@ -1,18 +1,12 @@
 import * as React from 'react';
-import {View, Text, StyleSheet, TextInput, Button, Alert, ScrollView, SafeAreaView, Platform, KeyboardAvoidingView} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Button, Alert, ScrollView, SafeAreaView, Platform, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import firebase from 'firebase/compat';
 import {useEffect, useState} from "react";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 
 const Create = ({navigation,route}) => {
-    const initialState = {
-        Name: '',
-        Location: '',
-        Time: '',
-        Category: '',
-        Participants: '',
-        Description: '',
-        Image: '' }
+    const initialState = {Name: '', Location: '', Time: '', Category: '', Participants: '', Description: '', Image: '' }
     const [newEvent,setNewEvent] = useState(initialState);
 
 
@@ -76,10 +70,14 @@ const Create = ({navigation,route}) => {
     };
 
     return (
+
         <KeyboardAvoidingView //Bruger denne funktion så tastatur ikke dækker for vores inputs.
             style={styles.container}
             behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         >
+            <TouchableOpacity onPress={() => navigation.goBack()} >
+                <Ionicons name="arrow-back" style={{top: 20, fontSize:45, margin: 10,}} />
+            </TouchableOpacity>
             <ScrollView style={{backgroundColor: '#E3DBDB'}}>
                 <View>
                     <Text style={styles.title}>
@@ -103,7 +101,6 @@ const Create = ({navigation,route}) => {
                             }
                             {/*Hvis vi er inde på edit car, vis save changes i stedet for add car*/}
                             <Button title={ isEditEvent ? "Save changes" : "Add event"} onPress={() => handleSave()} />
-                            <Button style={styles.button} title="Gå tilbage" onPress={() => navigation.goBack()}/>
                         </ScrollView>
                     </SafeAreaView>
                 </View>
@@ -118,6 +115,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: '#E3DBDB'
     },
     row: {
         flexDirection: 'row',

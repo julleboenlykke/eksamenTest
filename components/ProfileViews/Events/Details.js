@@ -1,4 +1,3 @@
-
 import {View, Text, Platform, FlatList, StyleSheet, Button, Alert, ScrollView, Image, TouchableOpacity} from 'react-native';
 import firebase from 'firebase/compat';
 import {useEffect, useState} from "react";
